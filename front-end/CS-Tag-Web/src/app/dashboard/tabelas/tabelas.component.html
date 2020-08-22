@@ -1,0 +1,94 @@
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<body>
+  
+  <title>CSTagWeb-tarifas</title>
+
+	<h1>  
+		<div class="row">
+			<div class="col s1">
+				<button class="botaoHome"  (click) = "click_home()" title="Voltar ao DASHBOARD" > </button>
+			</div>
+			<div class="col s10">
+				<br>
+				<p>TABELAS</p> 
+			</div>
+		</div>			
+
+	</h1>
+
+	
+	<h2>
+        <div class="row m2"> 
+            <div class="input-field col s2">
+				<label class="active" for="cliente">Tabela</label> 
+				<input [(ngModel)]="idtabela" id="idmv" type="text" class="validate" >
+				<button type="button" class="btn btn-info" (click)="click_consultar()" >Consultar</button>
+			</div>
+            <div class="input-field col s3">
+				<label class="active" for="cliente">Data inicio</label>
+				<input [(ngModel)]="datai" id="dataini" type="date" class="validate">
+			</div>
+            <div class="input-field col s3">
+				<label class="active" for="cliente">Data Fim</label>
+				<input [(ngModel)]="dataf" id="datafim" type="date" class="validate">
+			</div>
+			<div class="input-field col s2">
+				<input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+				<button type="button" class="btn btn-info" (click)="Upload()" >Upload</button>
+				<button type="button" class="btn btn-info" (click)="importar_excel()" >Importar</button>
+				
+
+			</div>
+
+		</div>
+	</h2>
+<h3>
+    <br>	
+	<table class="bordered striped centered">
+		<tbody>	
+			<tr>
+				<th>tabela</th>
+				<th>datainicio</th>
+				<th>datafim</th> 
+				<th>id_tabela</th> 
+				<th>ASSOCIATE_ID</th> 
+				<th>ASSOCIATE_COMP_KNOWN_NAME</th> 
+				<th>ENTRY_ID</th> 
+				<th>ROAD_CODE</th> 
+				<th>ROAD_ENTRY_KM</th>
+				<th>DESCRICAO</th> 
+				<th>CATEGORY_ARTESP_ID</th> 
+				<th>NAME</th> 
+				<th>TARIFA</th> 
+				<th>associateEntryId</th>
+			</tr>
+	
+			
+			<tr *ngFor="let s of getTabelas | paginate: { itemsPerPage: 100, currentPage: paginaAtual }; let i = index"> 
+				<td>{{s.id_tabela}}</td>
+				<td>{{s.datainicio| date : 'dd/MM/yyyy hh:mm'}}</td>
+				<td>{{s.datafim| date : 'dd/MM/yyyy hh:mm'}}</td>
+				<td>{{s.id_tabela}}</td> 
+				<td>{{s.ASSOCIATE_ID}}</td> 
+				<td>{{s.ASSOCIATE_COMP_KNOWN_NAME}}</td> 
+				<td>{{s.ENTRY_ID}}</td> 
+				<td>{{s.ROAD_CODE}}</td> 
+				<td>{{s.ROAD_ENTRY_KM}}</td>
+				<td>{{s.DESCRICAO}}</td> 
+				<td>{{s.CATEGORY_ARTESP_ID}}</td> 
+				<td>{{s.NAME}}</td> 
+				<td>{{s.TARIFA| currency : 'R$ '}} </td>
+				<td>{{s.associateEntryId}}</td>
+				
+			</tr>
+		</tbody>
+		<pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Proximo"></pagination-controls>
+		
+	</table>
+	
+</h3>
+ 
+
+</body>

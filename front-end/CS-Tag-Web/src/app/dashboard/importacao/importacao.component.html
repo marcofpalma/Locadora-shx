@@ -1,0 +1,189 @@
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<body>
+  
+  <title>CSTagWeb-importacao de faturas</title>
+	<h1>
+  		<div class="row">
+			<div class="col s1">
+				<button class="botaoHome"  (click) = "click_home()" title="Voltar ao DASHBOARD" > </button>
+			</div>
+			<div class="col s10">
+				<br>
+				<p>IMPORTACAO DE FATURAS</p> <br>
+			</div>
+		</div>	
+	 
+	</h1>
+<br>
+	<h2>
+        <div class="row m2"> 
+            <div class="input-field col s1">
+				<label class="active" for="cliente">Usuario</label> 
+				<input [(ngModel)]="idmovemais" id="idmv" type="text" class="validate" readonly=false value= "">
+			</div>
+            <div class="input-field col s1">
+				<label class="active" for="Osa">Operadora</label> 
+				<input [(ngModel)]="OSA" id="idOsa" type="text" class="validate" readonly=false value= "">
+			</div>
+            <div class="input-field col s3">
+				<label class="active" for="cliente">Data inicio</label>
+				<input [(ngModel)]="datai" id="dataini" type="date">
+			</div>
+            <div class="input-field col s3">
+				<label class="active" for="cliente">Data Fim</label>
+				<input [(ngModel)]="dataf" id="datafim" type="date">
+			</div> 
+			
+			<div *ngIf="tipoOSA === 1">
+				<div class="input-field col s1" >
+						<button class= "btn btn_primare" (click) = "click_consultar()"> Consultar </button>
+				</div>	
+				<div class="input-field col s1"> 
+					<button class= "btn btn_primare" (click) = "click_importar()"> Importar </button>
+					<button type="button" class="btn btn-info" (click) = "VerificaDivergencias()"> Verifica Divergencias </button>
+				</div>
+			</div>
+			<div *ngIf="tipoOSA === 2" class="input-field col s3">
+				<input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+				<!--button type="button" class="btn btn-info" (click) = "Click_Importa_conect_all()"> Importar all</button-->
+				<button type="button" class="btn btn-info" (click)="Click_ImportaSemParar()"> Importar </button>
+				<div class ="row ">
+					<button type="button" class="btn btn-info" (click) = "Click_ImportaSemPararMensalidades()"> Mensalidades </button>
+				</div>
+				<div class ="row ">
+					<button type="button" class="btn btn-info" (click) = "Click_ImportaSemPararVP()"> Vale Pedagio </button>
+				</div>	
+			    <div class="row">	
+					 <button type="button" class="btn btn-info" (click) = "VerificaDivergencias()"> Verifica Divergencias </button>
+			    </div>	 
+
+			</div>
+			<div *ngIf="tipoOSA === 3" class="input-field col s3">
+				<input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xl*">
+				<button type="button" class="btn btn-info" (click) = "Upload_conect()" >Upload</button>
+				<button type="button" class="btn btn-info" (click) = "Click_Importa_conect()"> Importar </button>
+				<button type="button" class="btn btn-info" (click) = "click_importar()"> Salvar </button>
+				<button type="button" class="btn btn-info" (click) = "VerificaDivergencias()"> Verifica Divergencias </button>
+				
+			</div>
+			<div *ngIf="tipoOSA === 4" class="input-field col s2"> <!--movemais excel-->
+				<input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xl*">
+				<button class= "btn btn_primare" (click) = "Click_Importa_MoveMais()"> Importar </button>
+				<button type="button" class="btn btn-info" (click) = "Click_Importa_MoveMais_mensalidade()"> Mensalidades </button>
+				<button type="button" class="btn btn-info" (click) = "VerificaDivergencias()"> Verifica Divergencias </button>
+			</div>
+		</div> <!--row-->
+		
+		<div class="row">
+			<div *ngIf="ckUpload === true">
+					<input type="checkbox" checked="true" />
+					<span>Upload Faturas -- {{sUpload}}</span>
+			</div>
+			<div *ngIf="ckUpload === false">
+					<input type="checkbox" />
+					<span>Upload Faturas</span>
+			</div>
+ 		
+			<div *ngIf="ckPassagem === true">
+					<input type="checkbox" checked="true" />
+					<span>Passagens -- {{sPassagem}}</span>
+			</div>
+			<div *ngIf="ckPassagem === false">
+					<input type="checkbox" />
+					<span>Passagens</span>
+			</div>
+
+			<div *ngIf="ckMensalidade === true">
+					<input type="checkbox" checked="true" />
+					<span>Mensalidades -- {{sMensalidade}}</span>
+			</div>
+			<div *ngIf="ckMensalidade === false">
+					<input type="checkbox" />
+					<span>Mensalidades</span>
+			</div>
+
+			<div *ngIf="ckVP === true">
+					<input type="checkbox" checked="true" />
+					<span>Vale Pedagio -- {{sVP}}</span>
+			</div>
+			<div *ngIf="ckVP === false">
+					<input type="checkbox" />
+					<span>Vale Pedagio</span>
+			</div>
+
+			<div *ngIf="ckDivergencias === true">
+					<input type="checkbox" checked="true" />
+					<span>Divergencias -- {{sDivergencias}}</span>
+			</div>
+			<div *ngIf="ckDivergencias === false">
+					<input type="checkbox" />
+					<span>Divergencias</span>
+			</div>
+			
+						
+			
+
+		</div> <!--row-->
+
+	</h2>
+
+<h3>
+	<div *ngIf="((ckUpload===false)||(ckDivergencias===false)||(ckMensalidade===false)||(ckPassagem===false))">
+		{{messagemProcessado}}
+		<br>
+		{{itemProcessado}}
+	</div>
+	<br>
+Processando: {{processando}}
+<div *ngIf="((ckUpload)&&(ckDivergencias)&&(ckMensalidade)&&(ckPassagem))"><h1> Processamento Finalizado</h1></div>	
+</h3>	
+
+ 
+
+<h3>
+	<br>	
+	<table class="bordered striped centered">
+		<tbody>	
+				<tr>
+					<th>Id cliente</th>
+					<th>Placa</th>
+					<th>Data</th>
+					<th>Processamento</th>
+					<th>Descricao</th>
+					<th>Tipo</th>
+					<th>Id</th>
+					<th>Historico</th>
+					<th>Valor</th>
+					<th>Associacao</th>
+					<th>Categoria</th>
+					<th>Classif.Categoria</th>
+					<th>AssociacaoId</th>
+				</tr>
+		
+				<tr *ngFor="let s of getMovMais  | paginate: { itemsPerPage: 100, currentPage: paginaAtual }; let i = index" > 
+					<td>{{s.idmovemais}}</td>
+					<td>{{s.plate}}</td>
+					<td>{{s.occurrenceDate| date : 'dd/MM/yyyy hh:mm'}}</td>
+					<td>{{s.processingDate| date : 'dd/MM/yyyy hh:mm'}}</td>
+					<td>{{s.description}}</td>
+					<td>{{s.type}}</td>
+					<td>{{s.historicId}}</td>
+					<td>{{s.historic}}</td>
+					<td>{{s.value / 100 | currency : 'R$ '}}</td>
+					<td>{{s.associate}}</td>
+					<td>{{s.classifiedCategory}}</td>					
+					<td>{{s.classifiedNameCategory}}</td>
+					<td>{{s.associateEntryId}}</td>
+					
+				</tr>
+			</tbody>	
+			<pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Proximo"></pagination-controls>
+	 
+	</table>
+		
+</h3>
+  
+
+</body>

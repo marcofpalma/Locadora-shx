@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+	<title>CSTagWeb-senhas</title>
+	
+	<h3>
+		<br>
+		<div class="row m8">
+			<div class=" col s2"> 
+				<h1 class="buttomlogout"> <button class="botaoHome"  (click) = "click_home()" title="Sair do sistema" > </button> </h1>	
+				<ul>
+					<li routerLinkActive="active"><a routerLink="/impfatura"> Faturas</a> </li><br>
+					<li routerLinkActive="active"><a routerLink="/pedagios"> Passagens Pedagio</a> </li><br>
+					<li routerLinkActive="active"><a routerLink="/duplicidadePedagio"> Duplicidades Pedagio </a> </li><br>
+					<li routerLinkActive="active"><a routerLink="/tarifas"> Mensalidades </a> </li><br>
+					<li routerLinkActive="active"><a routerLink="/valepedagio"> Vale Pegagio </a> </li><br>
+					<li routerLinkActive="active"><a routerLink="/placa"> Veiculo</a></li><br>
+					<div *ngIf = "engate">
+						<li routerLinkActive="active"><a routerLink="/carreta"> Carreta</a></li><br>
+						<li routerLinkActive="active"><a routerLink="/viagem"> Viagem </a> </li><br>
+						<li routerLinkActive="active"><a routerLink="/controleviagem"> Controle de Viagem </a> </li><br>
+						
+					</div>
+					<br>
+					
+						<div class="row m4"> 
+							<div class="input-field col s12">
+								<label class="active" for="cliente">Data inicio</label>
+								<input class="active" [(ngModel)]="datai"  [value]="datai | date:'yyyy-MM-dd'" id="dataini"  type="date" >
+								
+							</div>
+						</div>
+					<br>
+					<br>
+					
+					<br>		
+						<div class="row m3">
+							<div class="input-field col s12">
+								<label class="active" for="cliente">Data Fim</label>
+								<input class="active" [(ngModel)]="dataf" [value]="dataf | date:'yyyy-MM-dd'" id="datafim" type="date"  >
+							</div>
+						</div>
+					<br>	
+					<button class="Tabelas"  (click) = "consultaDados()" title="Atualizar dados DASHBOARD" >
+								<a>Atualiza Dashboard</a>
+					</button>			
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					
+
+				</ul>
+				
+			</div>
+
+			<div class="col s10">
+				<h1>
+					<div class="row">
+						<div class="col s11">
+							<br>
+							<p>DASHBOARD</p>
+							<div class="col s8">
+								<button class="Tabelas"  (click) = "visualizaDivergencia()" title="mudar para Divergencias" >
+									<a>Divergencias</a>
+								</button>
+								<button class="Tabelas"  (click) = "visualizaGrafico()" title="mudar para Graficos" >
+									<a>Graficos</a>
+								</button>
+								<button class="Tabelas"  (click) = "visualizaTabela()" title="mudar para tabelas" >
+									<a>Tabelas</a>
+								</button>
+							</div>	
+							<div class="col s1"></div>
+							<button class="Tabelas2">
+								<a>{{ambiente}} urs: {{idmovemais}} </a>
+							</button>	  
+						</div>
+					</div>	
+							
+				</h1>
+				<div class="opcoesexib">
+	<!-- tabelas-->
+					<div *ngIf = "exibtabela">
+						<br><br><br><br>
+						<div class=" col s2">
+							<h5 class="laraja"> ANALISE PLACAS </h5>				
+								<table class="striped">
+									<tbody>
+										<tr *ngFor="let p of getPlacas">
+											<td class="tb2">{{p.descricao}} </td>
+											<td class="tb2">{{p.qtde}}</td>
+											<td class="tb2">{{p.total| currency : 'R$ '}} </td>
+										</tr>
+									</tbody>	
+								</table>
+						</div>	
+						<div class="col s2">
+							<h5 class="verde"> ANALISE CLIENTE </h5>
+								<table class="striped">
+									<tbody>	
+										<tr *ngFor="let c of getClientes">
+											<td class="tb2">{{c.descricao}}</td>
+											<td class="tb2">{{c.qtde}} </td>
+											<td class="tb2">{{c.total| currency : 'R$ '}} </td>
+										</tr>
+									</tbody>	
+								</table>
+						</div>	
+						<div class="col s2">
+							<h5 class="roxo"> ANALISE SEGMENTO </h5>
+								<table class="striped">
+									<tbody>
+										<tr *ngFor="let s of getSegmento">
+											<td class="tb2">{{s.descricao}} </td>
+											<td class="tb2">{{s.qtde}}</td>
+											<td class="tb2">{{s.total| currency : 'R$ '}} </td>
+										</tr>
+									</tbody>
+								</table>
+						</div>	
+						<div class="col s2">
+							<h5 class="azul"> AN. VALE PEDAGIO</h5>
+								<table class="striped">
+									<tbody>
+										<tr *ngFor="let vp of getValePedagio">
+											<td class="tb2">{{vp.descricao}} </td>
+											<td class="tb2">{{vp.qtde}}</td>
+											<td class="tb2">{{vp.total| currency : 'R$ '}} </td>
+										</tr>
+									</tbody>
+								</table>	
+						</div>	
+						<div class="col s2">
+							<h5 class="marom"> ANALISE GRUPO </h5>
+								<table class="striped">
+									<tbody>
+										<tr *ngFor="let gp of getGrupo">
+											<td class="tb2">{{gp.descricao}} </td> 
+											<td class="tb2">{{gp.qtde}}</td>
+											<td class="tb2">{{gp.total| currency : 'R$ '}} </td>
+										</tr>
+									</tbody>
+								</table>	
+						</div>	
+						<div class="col s2">
+							<h5 class="chocolate"> ANALISE Sub-GRUPO </h5>
+								<table class="striped">
+									<tbody>
+										<tr *ngFor="let sgp of getSubGrupo">
+											<td class="tb2">{{sgp.descricao}} </td> 
+											<td class="tb2">{{sgp.qtde}}</td>
+											<td class="tb2">{{sgp.total| currency : 'R$ '}} </td>
+										</tr>
+									</tbody>
+								</table>	
+						</div>	
+					</div> <!--ngif-->
+	<!-- divergencias-->				
+					<div *ngIf = "exibdivergencia">
+						<div class="row m4">
+							<div class=" col s12 ">
+								<br><br><br>
+								<div class=" col s11 ">
+								     <h5 class="vermelho"> DIVERGENCIAS </h5>		
+								</div>		
+								<br>
+								<table class="striped centered">
+									<tbody class="divergencias" style="height: 430px">
+										<tr>
+											<th class="divergencias">Contestada</th>
+											<th style="width: 170px"
+											    class="divergencias">Data</th>
+											<th style="width: 270px"
+											    class="divergencias">Descricao</th>
+											<th class="divergencias">Quantidade</th>
+											<th style="width: 100px"
+											    class="divergencias">Valor</th>
+										</tr>
+										<tr *ngFor="let k of getDiferencas" style="font-size: 18px; ">
+											<td>
+												<div *ngIf="k.contestada"> <h3 class="fontgreen"> OK </h3> </div>
+												<div *ngIf="!k.contestada"><h3 class="fontred"> X </h3> </div>
+												 
+											</td>
+											<td>{{k.data|date : 'dd/MM/yyyy hh:mm'}}
+											<td> {{k.descricao}} </td>
+											<td>{{k.qtde}}</td>
+											<td>{{k.valor| currency : 'R$ '}} </td>
+											<td>
+												<button class= "btn_consulta_div" (click) = "Consultar_Divergencia(k.data,k.tipo)"> 
+													Consultar 
+												</button> 
+											</td>
+											<td>
+												<div *ngIf="!k.contestada"> 
+													<button class= "btn_consulta_div" (click) = "Contestar_Divergencia()"> 
+														Contestar 
+													</button> 
+												</div>	
+											</td>
+										</tr>
+									</tbody>	
+								</table>
+								<tfoot>
+									<tr class="total" *ngFor="let t of getDiferencasTotal" style="font-size: 20px; ">
+										<td style="width: 100px"> Total: qtde </td>
+   									    <td style="width:  50px">{{t.qtde}}</td>
+									    <td style="width:  120px">{{sTOTAL}}</td>
+
+										<td style="width: 150px">| Creditos: qtde</td> 
+   									    <td style="width:  50px">{{t.QMAIS}}</td>
+									    <td style="width:  120px">{{sVMAIS}}</td>
+
+										<td style="width: 150px">| Debitos: qtde</td>
+   									    <td style="width:  50px">{{t.QMENOS}}</td>
+									    <td style="width:  120px">{{sVMENOS}}</td>
+
+									</tr>
+								</tfoot>
+							</div>
+						</div>
+					</div> <!--ngif-->
+
+	<!-- graficos-->
+					<br>
+					<div>
+						
+						<div class="row m4">
+							
+							<div class=" col s6">
+								<canvas #meuCanvas></canvas>
+							</div>
+							
+							<div class=" col s6">
+								<canvas #meuCanvas4></canvas>
+							</div>
+						</div>
+						<div class="row">
+							<div class=" col s4">
+								<canvas #meuCanvas2></canvas>
+							</div>
+							<div class=" col s4">
+								<canvas #meuCanvas3></canvas>
+							</div>
+							<div class=" col s4">
+								<canvas #meuCanvas5></canvas>
+							</div>
+						</div>
+					</div> <!--end graficos-->
+				</div> <!--div class="opcoesexib"-->	
+			</div>
+		</div>
+		
+	</h3>
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="../materialize/materialize.min.js"></script>
+	<!-- js chart js-->
+	<script src="node_modules/chart.js/Chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</body>
+
+</html>

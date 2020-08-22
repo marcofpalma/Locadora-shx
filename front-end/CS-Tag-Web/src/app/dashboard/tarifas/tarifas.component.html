@@ -1,0 +1,87 @@
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<body>
+  
+  <title>CSTagWeb-tarifas</title>
+
+	<h1>  
+		<div class="row">
+			<div class="col s1">
+				<button class="botaoHome"  (click) = "click_home()" title="Voltar ao DASHBOARD" > </button>
+			</div>
+			<div class="col s10">
+				<br>
+				<p>MENSALIDADES</p> 
+			</div>
+		</div>			
+
+	</h1>
+
+	
+	<h2>
+        <div class="row m2"> 
+            <div class="input-field col s1">
+				<label class="active" for="cliente">Usuario</label> 
+				<input [(ngModel)]="idmovemais" id="idmv" type="text" class="validate" readonly=false value= "">
+			</div>
+            <div class="input-field col s3">
+				<label class="active" for="cliente">Data inicio</label>
+				<input [(ngModel)]="ano" id="dataini" type="year" class="datepicker">
+			</div>
+            <div class="input-field col s1">
+				<button class= "btn btn_primare" (click) = "click_consultar()"> Consultar </button>
+			</div>
+
+		</div>
+	</h2>
+
+	<div *ngIf="aguard">
+		<h1>
+			Aguarde Processando...
+		</h1>
+	</div>
+<h3>
+    <br>	
+	<table class="bordered striped centered">
+		<thead>
+			<tr>
+				<th style="width: 112px">Placa</th>
+				<th style="width: 112px">Janeiro</th>
+				<th style="width: 112px">Fevereiro</th>
+				<th style="width: 112px">Marco</th>
+				<th style="width: 112px">Abril</th>
+				<th style="width: 112px">Maio</th>
+				<th style="width: 112px">Junho</th>
+				<th style="width: 112px">Julho</th>
+				<th style="width: 112px">Agosto</th>
+				<th style="width: 112px">Setembro</th>
+				<th style="width: 112px">Outubro</th>
+				<th style="width: 112px">Novembro</th>
+				<th style="width: 112px">Dezembro</th>
+			</tr>
+		</thead>
+		<tbody>				
+			<tr *ngFor="let s of getPedagios"> 
+				<td style="width: 120px">{{s.placa}}</td>
+				<td style="width: 120px"><div *ngIf="s.vljan !== 0">{{s.vljan| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vlfev !== 0">{{s.vlfev| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vlmar !== 0">{{s.vlmar| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vlabr !== 0">{{s.vlabr| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vlmai !== 0">{{s.vlmai| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vljun !== 0">{{s.vljun| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vljul !== 0">{{s.vljul| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vlago !== 0">{{s.vlago| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vlset !== 0">{{s.vlset| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vlout !== 0">{{s.vlout| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vlnov !== 0">{{s.vlnov| currency : 'R$ '}}</div> </td>
+				<td style="width: 120px"><div *ngIf="s.vldez !== 0">{{s.vldez| currency : 'R$ '}}</div> </td>
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+</h3>
+ 
+
+</body>

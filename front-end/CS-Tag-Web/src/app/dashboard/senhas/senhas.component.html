@@ -1,0 +1,93 @@
+<body>
+  
+  <title>CSTagWeb-senhas</title>
+
+	<h1>  
+		<div class="row">
+			<div class="col s1">
+				<button class="botaoHome"  (click) = "click_home()" title="Voltar ao DASHBOARD" > </button>
+			</div>
+			<div class="col s10">
+				<br>
+				<p>LISTA DAS SENHAS</p> <br>
+				<button  (click) = "click_tabelas()" id="tabelas"> Tabelas </button>
+			</div>
+		</div>
+
+		 
+	</h1>
+           <!-- Compiled and minified CSS -->
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	
+<h2>
+	<br>
+	<div class="row"> 
+		<div class="input-field col s1">
+			<label class="active" for="fdocumento">documento</label> 
+			<input [(ngModel)]="vUsuario.documento"  id="iddocumento" type="text" class="validate" >
+		</div>	
+		<div class="input-field col s3">
+			<label class="active" for="fnome">nome</label>
+			<input [(ngModel)]="vUsuario.nome" id="idnome" type="text" class="autocomplete">
+		</div>	
+		<div class="input-field col s2">
+			<label class="active" for="fsenha">senha</label>
+			<input [(ngModel)]="vUsuario.senha" id="idsenha" type="text" class="autocomplete">
+		</div>
+		<div class="input-field col s2">
+			<label class="active" for="fidmovemais">id cliente</label>
+			<input [(ngModel)]="vUsuario.idmovemais" id="ididmovemais" type="text" class="autocomplete">
+		</div>
+		<div class="input-field col s1">
+			<label class="active" for="ftipoOSA">Tipo</label>
+			<input [(ngModel)]="vUsuario.tipoOSA" id="idtipoOSA" type="text" class="autocomplete" title="Tipo 1:=> Move+, 2:=> sem parar, 3:=> ConectCar">
+		</div>
+		<div class="input-field col s1">
+			<p>
+			<label>
+				<input [(ngModel)]="vUsuario.engate" type="checkbox" id="idengate" />
+				<span>engate</span>
+			</label>
+			</p>
+		</div>
+
+   		<div class="input-field col s2">
+			<button class= "btn btn_primare" (click) = "click_salvar()"> Salvar </button>	
+			<button class= "btn btn_excluir" (click) = "click_cancelar()"> Cancelar </button>		
+		</div>
+    </div>
+		 
+		 
+</h2>
+<h3>
+	<br>	
+	<table class="bordered striped centered">	
+		<tbody>	
+			<tr>
+				<th>Documento</th>
+				<th>Nome</th>
+				<th>Senha</th>
+				<th>ID-Cliente</th>
+				<th>Tipo</th>	
+				<th>Engate</th>
+			</tr>
+			<tr *ngFor="let s of senhas"> 
+				<td>{{s.documento}}</td> 
+				<td>{{s.nome}}</td>
+				<td>{{s.senha}}</td>
+				<td>{{s.idmovemais}}</td>
+				<td>{{s.tipoOSA}}</td>
+				<td>{{s.engate}}</td>
+
+				<td><button class= "btn btn_primare" (click) = "click_alterar(s)"> Editar </button></td>
+				<td><button class= "btn btn_excluir" (click) = "click_excluir(s.documento)"> Excluir </button></td>
+
+			</tr>
+		</tbody>		
+	</table>
+</h3>
+
+ <!-- Compiled and minified JavaScript -->
+    <script src="../materialize/materialize.min.js"></script>
+ 
+</body>

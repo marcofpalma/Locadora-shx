@@ -1,0 +1,174 @@
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<body>
+  
+  <title>CSTagWeb-Vale Pedagio</title>
+
+	<h1>  
+		<div class="row">
+			<div class="col s1">
+				<button class="botaoHome"  (click) = "click_home()" title="Voltar ao DASHBOARD" > </button>
+			</div>
+			<div class="col s10">
+				<br>
+				<p>VALE PEDAGIO</p> 
+			</div>
+		</div>			
+
+	</h1>
+
+	
+	<h2>
+        <div class="row m2"> 
+            <div class="input-field col s1">
+				<label class="active" for="cliente">Usuario</label> 
+				<input [(ngModel)]="idmovemais" id="idmv" type="text" class="validate" readonly=false value= "">
+			</div>
+            <div class="input-field col s2">
+				<label class="active" for="cliente">Data inicio</label>
+				<input [(ngModel)]="datai" id="dataini" type="date" class="validate">
+			</div>
+            <div class="input-field col s2">
+				<label class="active" for="cliente">Data Fim</label>
+				<input [(ngModel)]="dataf" id="datafim" type="date" class="validate">
+			</div>
+			<div class="input-field col s1">
+				<label class="active" for="boxplaca">Placa</label>
+				<select [(ngModel)]="placa" class="browser-default" id="boxplaca" value="">
+					<option value="" selected>todos</option>
+					<option *ngFor="let p of getPlacas" value = {{p.PLACA}}>{{p.PLACA}}</option>
+				</select>
+			</div>
+			<div class="input-field col s2">
+				<label class="active" for="boxViagem">Viagem</label>
+				<select [(ngModel)]="viagem" class="browser-default" id="boxViagem" value="">
+					<option value="" selected>todos</option>
+					<option *ngFor="let p of getViagens" value = {{p.VIAGEM}}>{{p.VIAGEM}}</option>
+				</select>
+			</div>
+			<div class="input-field col s1">
+				<label class="active" for="boxAnalitico">Filtro Analitico</label>
+				<select [(ngModel)]="filtro" class="browser-default" id="boxAnalitico" value="">
+					<option value="" selected>todos</option>
+					<option value="positivo" selected>positivo</option>
+					<option value="negativo" selected>negativo</option>					
+					<option value="zerado" selected>zerado</option>
+				</select>
+			</div>			
+
+			<div class="input-field col s1">
+				<button class= "btn btn_primare" (click) = "click_consultar()"> Consultar </button>
+			</div>
+
+		</div>
+	</h2>
+<h3>
+	<div class="row">
+	    <div class="col s5">
+			<br>	
+			<table class="bordered striped centered">
+				<tbody style="height: 360px">	
+					<tr>
+						<th>Viagem</th>
+						<th>Placa</th>
+						<th>Qtde</th>
+						<th>Creditos</th>
+						<th>Debitos</th>
+						<th>Total</th>
+						
+					</tr>
+			
+					
+					<tr *ngFor="let s of getVP"
+						[ngClass]="{'green':((s.total < 0.01) && (s.total > -0.001))
+								   ,'red':(s.total < 0 )
+								   ,'blue':(s.total > 0 )  }"> 
+						<td>{{s.viagem}}</td>
+						<td>{{s.placa}}</td>
+						<td>{{s.qtde}}</td>
+						<td>{{s.CREDITO| currency : 'R$ '}} </td>
+						<td>{{s.DEBITO| currency : 'R$ '}} </td>
+						<td>{{s.total| currency : 'R$ '}} </td>
+						<td><button class= "btn btn_primare" (click) = "click_detalhe(s.viagem)"> Detalhes </button></td>
+						
+
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr style="font-size: 20px; ">
+						<div class="row">
+							<div class="input-field col s3">
+								<label class="active" for="Zerados">Zerados</label> 
+								<input [(ngModel)]="qtdeOK" id="Zerados" type="text" class="validate" readonly=false value= "">
+							</div>
+							<div class="input-field col s3">
+								<label class="active" for="Negativos">Negativos</label> 
+								<input [(ngModel)]="qtdeNegativo" id="Negativos" type="text" class="validate" readonly=false value= "">
+							</div>
+							<div class="input-field col s3">
+								<label class="active" for="Positivos">Positivos</label> 
+								<input [(ngModel)]="qtdePositivo" id="Positivos" type="text" class="validate" readonly=false value= "">
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s3">
+								<label class="active" for="Zerados2">Zerados</label> 
+								<input [(ngModel)]="svlOK" id="Zerados2" type="text" class="validate" readonly=false  >
+							</div>
+							<div class="input-field col s3">
+								<label class="active" for="Negativos2">Negativos</label> 
+								<input [(ngModel)]="svlNegativo" id="Negativos2" type="text" class="validate" readonly=false value= "">
+							</div>
+							<div class="input-field col s3">
+								<label class="active" for="Positivos2">Positivos</label> 
+								<input [(ngModel)]="svlPositivo" id="Positivos2" type="text" class="validate" readonly=false value= "">
+							</div>
+						</div>
+
+					</tr>
+				</tfoot>		
+			</table>
+		</div>
+		<div class="col s7">
+			<br>	
+			<table class="bordered striped centered">
+				<tbody>	
+					<tr>
+						<th>Tipo</th>
+						<th>Valor</th>
+						<th>Placa</th>
+						<th>TAG</th>
+						<th>Marca</th>
+						<th>Categoria</th>
+						<th>Data</th>
+						<th>Descricao</th>
+						<th>Rodovia</th>
+						<th>Praca</th>
+						<th>Embarcador</th>
+					</tr>
+			
+					
+					<tr *ngFor="let v of getdetalhes"> 
+						<td>{{v.TIPO}}</td>
+						<td>{{v.VALOR | currency : 'R$ '}}</td>
+						<td>{{v.PLACA}}</td>
+						<td>{{v.TAG}}</td>
+						<td>{{v.MARCA}}</td>
+						<td>{{v.CATEG}}</td>
+						<td>{{v.DATA | date : 'dd/MM/yyyy hh:mm'}}</td>
+						<td>{{v.DESCRICAO}}</td>
+						<td>{{v.RODOVIA}}</td>					
+						<td>{{v.PRACA}}</td>
+						<td>{{v.EMBARCADOR}}</td>
+
+					</tr>
+				</tbody>		
+			</table>
+		</div>
+	</div>	
+
+</h3>
+ 
+
+</body>

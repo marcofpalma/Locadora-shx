@@ -1,0 +1,214 @@
+
+margim {  margin: 5mm 5mm;}
+
+
+tr.red{ background-color: red;}
+
+body {
+  width: auto, auto;
+ 
+  margin: 5mm 5mm;
+  background-color: white; /* cor fundo */
+  margin-left: 5mm;
+  margin-right: 5mm;
+
+  background-size: 1360px;
+
+  height: 120;
+  width: 100;
+
+
+}
+
+
+h1 {
+  width: auto, auto;
+  margin: 0;
+  padding: 2px 2px;
+  text-align: left;
+  background-color: white;
+  color: SteelBlue;
+  font-size: 25px;
+  font-weight: bold;
+ 
+}
+
+h2 {
+  width: auto, auto;
+  margin: 0;
+  padding: 20px 20px;    
+  padding: 0 20px 20px 20px;
+  border: 2px solid black;
+}
+
+
+h3 {
+  width: auto, auto;
+ 
+  margin: 0;
+  padding: 20px 0;
+  font-size: 14px;
+  table-layout:auto; 
+  text-align: center;
+    
+
+  padding: 0 20px 20px 20px;
+  border: 2px solid black;
+}
+
+
+p{
+   text-align: center;
+   margin: 0mm;
+}
+
+button{
+  size: 0mm;
+  text-align: left;
+  margin-inline-start: 3mm;
+  font-size: 20px;
+  background-color: Gainsboro; /* cor fundo */
+  border: none;
+  color: red;
+  text-shadow: 3px 3px 1px black;
+}
+
+button:hover {
+ color: blue;
+}
+.button1 {
+
+  
+  size: 0mm;
+   
+  text-align: left;
+  margin-inline-start: 3mm;
+  font-size: 20px;
+  background-color: slategrey;
+  border: none;
+  color: black;
+  text-shadow: 3px 3px 1px gainsboro;
+
+}
+
+.btn_primare {
+  text-shadow: 3px 3px 1px silver;
+  font-style: italic;
+  color: black;
+  background-color: Gainsboro; /* cor fundo */
+
+    }
+
+.button-secondary {
+     background: rgb(66, 184, 221); /* this is a light blue */
+    }
+
+
+td.a{
+  mask: money;
+  color: royalblue;
+  
+}
+
+th{
+  background-color: #87CEFA;
+    font-weight: 500;
+}
+
+
+
+table{
+  width:100%; 
+  border: black;
+  display:block;
+}
+
+
+thead { 
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+}
+tbody {
+  height: 200%;
+  display: inline-block;
+  width: 100%;
+  overflow: auto;
+   
+}
+
+
+
+*{padding: 0px;
+  margin: 0px;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+  font-size: 100;
+}
+
+
+
+
+nav {
+  background-color: rgba(16,16,16,.5);
+  top: 140px;
+  width: 200px;
+  height:85%;
+  left: -200px;
+  position: absolute;
+  transition: all .5s;
+}
+
+
+S
+ul{ 
+
+  top: 70px;
+  position: absolute;
+  width: 100%;
+
+}
+
+
+a{
+   display: block;
+   padding: 20px 5 px;
+   color: white;
+   font-size: 15px;
+  }
+
+a:hover {
+  background-color: rgba(176,224,230);
+  color: black;
+
+}
+
+
+label{
+
+  padding: 25px;
+  position: absolute;
+  z-index: 1;
+  font-size: 15px;
+  font: large;
+  color: red;
+  text-shadow: 3px 3px 1px black;
+}
+
+
+
+
+
+html { 
+  font-size: 10px; /* px significa "pixels": o tamanho da fonte base é agora de 10 pixels */ 
+  font-family: "Open Sans", sans-serif; /* este deve ser o nome da fonte que você obteve no Google Fonts */ 
+}
+
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,80 @@
+
+
+
+body{
+ background-position: center;
+  align-items: center;
+  width: auto, auto;
+  max-height: auto;
+  margin: 0mm 0mm;
+  background-color: white;
+   margin-left: 0mm;
+   margin-right: 0mm;
+  background: url('../../imagens/home.jpg') ;
+  background-repeat:  no-repeat ;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: bottom;
+ /* height: 720px;*/
+ height: auto;
+}
+
+h1{
+  text-align:center;
+  
+}
+h2{
+  
+  width: auto, auto;
+  margin: 0;
+  padding: 20px 0;    
+  padding: 0 20px 20px 20px;
+  border: none;
+}
+
+
+h4{
+  
+  position: absolute;
+  background-color: white;
+  background-position-x: 5mm;
+  border: none;
+}
+h6{
+  position: absolute;
+  
+  background-color: white;
+  background-position-x: 5mm;
+  color:blue;
+  font-style: italic;
+  font-size: 10px;
+}
+h5{
+  color:gray;
+   
+}
+
+button{
+    background-color: darkslategrey;
+    text-shadow: none;
+}
+
+
+
+label{
+
+  padding: 2px;
+  text-align: right;
+  position: static;
+  z-index: 0;
+  font-size: 12px;
+  font: large;
+  color: black;
+     text-shadow: 0px 0px 0px black;
+}
+
+
+html { 
+  font-size: 10px; /* px significa "pixels": o tamanho da fonte base é agora de 10 pixels */ 
+  font-family: "Open Sans", sans-serif; /* este deve ser o nome da fonte que você obteve no Google Fonts */ 
+}

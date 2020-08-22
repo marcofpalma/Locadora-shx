@@ -1,0 +1,213 @@
+<html>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+ <body>
+  
+	<title>CSTagWeb-pedagios</title>
+	<h1>
+		<div class="row">
+			<div class="col s1">
+				<button class="botaoHome"  (click) = "click_home()" title="Voltar ao DASHBOARD" > </button>
+			</div>
+			<div class="col s10">
+				<br>
+				<p>	PASSAGENS DE PEDAGIOS</p> <br>
+			</div>
+		</div>	
+
+	</h1>
+
+		<h2>
+			<div class="row m2"> 
+				<div class="input-field col s1">
+					<label class="active" for="cliente">Usuario</label> 
+					<input [(ngModel)]="idmovemais" id="idmv" type="text" class="validate" readonly=false value= "">
+				</div>
+				<div class="input-field col s3">
+					<label class="active" for="cliente">Data inicio</label>
+					<input [(ngModel)]="datai" id="dataini" type="date">
+				</div>
+				<div class="input-field col s3">
+					<label class="active" for="cliente">Data Fim</label> 
+					<input [(ngModel)]="dataf" id="datafim" type="date">
+					
+				</div>
+							<div class="input-field col s1">
+					<button class= "btn btn_primare" (click) = "click_consultar()"> Consultar </button>
+				</div>
+
+			</div>
+			
+			<div class="row m2">
+				<div class="input-field col s1">
+					<label class="active" for="boxplaca">Placa</label>
+					<select [(ngModel)]="filtros.placa" class="browser-default" id="boxplaca" value="">
+						<option value="" selected>todos</option>
+						<option *ngFor="let p of getPlacas" value = {{p.placa}}>{{p.placa}}</option>
+					</select>
+				</div>
+				<div class="input-field col s2">
+					<label class="active" for="boxsegmento">Segmento</label>
+					<select [(ngModel)]="filtros.segmento" class="browser-default" id="boxsegmento" value="">
+						<option value="" selected>todos</option>
+						<option *ngFor="let s of getSegmento" value = {{s.segmento}}>{{s.segmento}}</option>
+					</select>
+				</div>
+				<div class="input-field col s2">
+					<label class="active" for="boxvalepedagio">Vale Pedagio</label>
+					<select [(ngModel)]="filtros.valepedagio"  class="browser-default" id="boxvalepedagio" value="">
+						<option value="" selected>todos</option>
+						<option *ngFor="let vp of getValePedagio" value = {{vp.valepedagio}}> {{vp.valepedagio}} </option>
+					</select>
+				</div>
+				<div class="input-field col s2">
+					<label class="active" for="boxcliente">Cliente</label>
+					<select [(ngModel)]="filtros.cliente" class="browser-default" id="boxcliente" value="">
+						<option value="" selected>todos</option>
+						<option *ngFor="let cli of getClientes" value = {{cli.cliente}}>{{cli.cliente}}</option>
+					</select>
+				</div>
+				<div class="input-field col s2">
+					<label class="active" for="boxgrupo">Grupo</label>
+					<select [(ngModel)]="filtros.grupo" class="browser-default" id="boxgrupo" value="">
+						<option value="" selected>todos</option>
+						<option *ngFor="let g of getGrupo" value = {{g.grupo}}>{{g.grupo}}</option>
+					</select>
+				</div>
+				<div class="input-field col s2">
+					<label class="active" for="boxsubgrupo">Sub-Grupo</label>
+					<select [(ngModel)]="filtros.subgrupo" class="browser-default" id="boxsubgrupo" value="">
+						<option value="" selected>todos</option>
+						<option *ngFor="let sg of getSubGrupo" value = {{sg.subgrupo}}>{{sg.subgrupo}}</option>
+					</select>
+					
+				</div>
+				<div class="input-field col s1">
+					<label class="active" for="boxtarifa">Filtro Analitico</label>
+					<select [(ngModel)]="filtros.tarifa" class="browser-default" id="boxtarifa" value="">
+						<option value="" selected>todos</option>
+						<option value="vazil" selected>Eixo vazil</option>
+						<option value="carregado" selected>Eixo carregado</option>
+						<option value="divergente" selected>Eixo divergente</option>
+						<option value="tarifaPositiva" selected>Tarifa Positiva</option>
+						<option value="tarifaNegaiva" selected>Tarifa Negativa</option>
+					</select>
+					
+				</div>
+
+			</div>	
+				
+				
+	</h2>
+
+	
+	<div *ngIf="aguard">
+		<h1>
+			Aguarde Processando...
+		</h1>
+	</div>
+	
+	<h3>
+	<div class="table">	
+		<table class="striped centered" >
+			<tbody>
+				<tr>
+					<th>Placa</th>
+					<th>Catg</th>
+					<th>Data</th>
+					<th>Descricao</th>
+					<th>Tipo</th>
+					<th>Id</th>
+					<th>Historico</th>
+					<th>valor Cobrado</th>
+					<th>Valor Tabela</th>
+					<th>Associacao</th>
+					<th>Eixos cobrado</th>
+					<th *ngIf="engate === false">Eixos carregado</th>
+					<th *ngIf="engate === false">Eixos vazio</th>
+					<th>Segmento</th>
+					<th>Cliente</th>
+					<th>Grupo</th>
+					<th>Subgrupo</th>
+					<div *ngIf="engate">
+						<th style="height: 40px;">Viagem</th>
+					</div>
+				</tr> 
+		
+				<tr *ngFor="let s of getPedagios | paginate: { itemsPerPage: 100, currentPage: paginaAtual }; let i = index"   
+				[ngClass]="{'yellow' :((s.descricao === 'nao cadastrado' ) 
+								&& (s.segmento === null )
+								&& (s.valepedagio === null )
+								&& (s.cliente === null )
+								&& (s.grupo === null )
+								&& (s.subgrupo === null ) )  }">
+					<td class ="col s1"	>{{s.plate}}</td>
+					<td>{{s.classifiedCategory}}</td>
+					<td>{{s.occurrenceDate| date : 'dd/MM/yyyy hh:mm'}}</td>
+					<td>{{s.description}}</td>
+					<td>{{s.type}}</td>
+					<td>{{s.historicId}}</td>
+					<td>{{s.historic}}</td>
+					<td [ngClass]="{'red':(s.value > s.TARIFA),'blue':(s.value < s.TARIFA ),'white':(( ((s.value- s.TARIFA)>-0.001) && ((s.value- s.TARIFA)<0.001) ) || (s.TARIFA === null))}"
+						 title = "tarifa cobrada, verifique quando vermelho">
+						{{s.value| currency : 'R$ '}} 
+					</td>
+					<td [ngClass]="{'red':(s.value > s.TARIFA),'blue':(s.value < s.TARIFA ),'white':(( ((s.value- s.TARIFA)>-0.001) && ((s.value- s.TARIFA)<0.001) ) || (s.TARIFA === null))}" 
+						title = "tarifa tabela, verifique quando vermelho" > 
+						<div *ngIf="s.TARIFA === null"> 
+							{{s.value| currency : 'R$ '}}
+						</div>
+						<div *ngIf="s.TARIFA !== null"> 
+							{{s.TARIFA| currency : 'R$ '}}
+						</div> 
+
+					</td>
+					<td> {{s.associate}}</td>
+
+					<div *ngIf="engate">
+                         <td>{{s.classifiedNameCategory}}</td>
+					</div>
+
+						<td *ngIf="engate === false" [ngClass]="{'red':((s.classifiedNameCategory !== s.eixos) 
+											&& (s.classifiedNameCategory !== s.eixos2))
+										,'green':(s.classifiedNameCategory === s.eixos )
+										, 'blue':(s.classifiedNameCategory === s.eixos2 )
+									}" 
+						title = "eixo cobrado, verifique quando vermelho">
+						{{s.classifiedNameCategory}}</td>
+						<td *ngIf="engate === false" [ngClass]="{'red':((s.classifiedNameCategory !== s.eixos) 
+											&& (s.classifiedNameCategory !== s.eixos2))
+									,'green':(s.classifiedNameCategory === s.eixos )
+									}" 
+							title = "eixos carregado">
+							{{s.eixos}} </td>
+						<td *ngIf="engate === false" [ngClass]="{'red':((s.classifiedNameCategory !== s.eixos) 
+											&& (s.classifiedNameCategory !== s.eixos2))
+									,'blue':(s.classifiedNameCategory === s.eixos2 )
+									,'green':((s.classifiedNameCategory === s.eixos2) && (s.classifiedNameCategory === s.eixos) )
+									}" 
+							title="eixos vazil">
+							{{s.eixos2}} </td>
+					<td>{{s.segmento}} </td>
+					<td>{{s.cliente}}</td>
+					<td>{{s.grupo}}</td>
+					<td>{{s.subgrupo}}</td>
+					
+					<div *ngIf="engate">
+						<td>{{s.viagem}}</td>
+					</div>
+				</tr>
+			</tbody>
+			<pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Proximo"></pagination-controls>
+		<a>Total de passagens: qtde {{totalpassagens}}</a>
+		<!--a>Total de passagens: qtde {{totalpassagens}}  {{totalpassagensvl}}</a-->
+		</table>
+	</div>
+	</h3>
+	<!-- Compiled and minified JavaScript -->
+		<script src="../materialize/materialize.min.js"></script>
+ 
+
+</body>
+</html>

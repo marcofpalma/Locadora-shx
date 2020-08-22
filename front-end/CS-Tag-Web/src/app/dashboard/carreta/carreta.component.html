@@ -1,0 +1,142 @@
+<body>
+ 
+	
+  <title>CSTagWeb-Carretas</title>
+
+	<h1>
+		<div class="row">
+			<div class="col s1">
+				<button class="botaoHome"  (click) = "click_home()" title="Voltar ao DASHBOARD" > </button>
+			</div>
+			<div class="col s10">
+				<button class="Tabelas"  (click) = "visualizaImportacao()" title="importacao de cadastro de placas" >
+					<a>Importacao</a>
+				</button>
+				<p>PLACAS DAS CARRETAS</p> <br>
+			</div>
+		</div>	  
+	 
+	</h1>
+           <!-- Compiled and minified CSS -->
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<h2>
+	 	<div *ngIf = "exibimportacao === false">
+			<div class="row">
+				<h2>IMPORTACAO</h2>
+				<input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+				<button type="button" class="btn btn-info" (click)="Click_ImportaVeiculos()"> Importar </button>
+			</div>
+			<br>
+		</div>
+		<div *ngIf = "exibimportacao">	
+			<div class="row"> 
+				<div class="input-field col s1">
+					<label class="active" for="placa">Placa.:</label> 
+					<input [(ngModel)]="placa.placa"  id="placa" type="text" class="validate" >
+				</div>	
+				<div class="input-field col s4">
+					<label class="active" for="descricao">Descricao</label>
+					<input [(ngModel)]="placa.descricao" id="descricao" type="text" class="autocomplete">
+				</div>	
+				<div class="input-field col s3">
+					<label class="active" for="marca">Marca</label>
+					<input [(ngModel)]="placa.marca"  id="marca" type="text" class="autocomplete">
+				</div>
+				<div class="input-field col s3">
+					<label class="active" for="modelo">modelo</label>
+					<input [(ngModel)]="placa.modelo" id="modelo" type="text" list=browsers>
+					<datalist  id=browsers >
+						<div *ngFor="let op4 of getModelo">
+							<option> {{op4.valor}}
+						</div>
+					</datalist>
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s1">
+					<label class="active" for="ano">ano</label>
+					<input [(ngModel)]="placa.ano" id="ano" type="text" class="autocompletelete">
+				</div> 
+				<div class="input-field col s3">
+					<label class="active" for="tipo">tipo</label>
+					<input [(ngModel)]="placa.tipo" id="tipo" type="text" list=browsers2>
+					<datalist  id=browsers2 >
+						<div *ngFor="let op3 of getTipo">
+							<option> {{op3.valor}}
+						</div>
+						
+					</datalist>
+
+				</div>
+				<div class="input-field col s3">
+					<input [(ngModel)]="placa.eixos" type=text list=browsers4>
+					<datalist  id=browsers4 >
+						<div *ngFor="let op of getEixos">
+							<option> {{op.valor}}
+						</div>
+						
+					</datalist>
+					<label class="active" for="eixos">eixos carregado</label>
+				</div>
+				<div class="input-field col s3">
+					<input [(ngModel)]="placa.eixos2" type=text list=browsers3 >
+					<datalist  id=browsers3 >
+						<div *ngFor="let op2 of getEixos">
+							<option> {{op2.valor}}
+						</div>
+					</datalist>
+					<label class="active" for="eixos">eixo vazil</label>
+				</div>
+
+				<div class="input-field col s2">
+					<button class= "btn btn_primare" (click) = "click_salvar()"> Salvar </button>	
+					<button class= "btn btn_excluir" (click) = "click_cancelar()"> Cancelar </button>		
+				</div>		
+			</div>				
+		</div>
+</h2>
+
+<h3>
+	<br>	
+		<table class="bordered striped centered">
+			<tbody>	
+				<tr>
+					<th>Placa</th>
+					<th>Descricao</th>
+					<th>Marca</th>
+					<th>Tipo</th>
+					<th>Modelo</th>
+					<th>Ano</th>
+					<th>Eixos Carregado</th>
+					<th>Eixos Vazil</th>
+				</tr>
+		
+				<tr *ngFor="let s of Placas | paginate: { itemsPerPage: 100, currentPage: paginaAtual }; let i = index"> 
+					<td>{{s.placa}}</td>
+					<td>{{s.descricao}}</td>
+					<td>{{s.marca}}</td>
+					<td>{{s.tipo}}</td>
+					<td>{{s.modelo}}</td>
+					<td>{{s.ano}}</td>
+					<td>{{s.eixos}}</td>
+					<td>{{s.eixos2}}</td>
+					
+					<td>
+						<button class= "btn btn_primare" (click) = "click_alterar(s)"> Editar </button> 
+					</td>
+
+					<td>
+						<button class= "btn btn_excluir" (click) = "click_excluir(s.placa)"> Excluir </button> 
+					</td>
+
+					
+				</tr>
+			</tbody>		
+			<pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Proximo"></pagination-controls>
+		</table>
+</h3>
+ 
+ <!-- Compiled and minified JavaScript -->
+    <script src="../materialize/materialize.min.js"></script>
+</body>

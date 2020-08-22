@@ -1,0 +1,404 @@
+tfoot{
+     font-weight: bold;
+     text-align: center;     
+}
+
+margim {  margin: 5mm 5mm;}
+
+
+
+h1.fatura{
+background-image : './imagens/BtnFatura.jpg';
+
+
+}
+div.figure {
+  float: right;
+  width: 30%;
+  text-align: center;
+  font-style: italic;
+  font-size: smaller;
+  text-indent: 0;
+  border: thin silver solid;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+div.opcoesexib{
+  height:  200px;
+
+  size: 400px;
+}
+
+button.botaoHome{
+  background-image:url("../../imagens/btnLogout.jpg");
+  top: -20px;
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  cursor: Pointer ;
+}
+
+button.logo{
+  background-image:url("../../imagens/btnHome.jpg");
+  top: -20px;
+  width: 70px;
+  height: 50px;
+  background-size: cover;
+  cursor: Pointer ;
+}
+
+button.Tabelas{
+  background-color: darkslategrey;
+  background-size: cover;
+  cursor: Pointer ;
+  text-shadow: none;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;}
+.hover{color: blue;}
+
+button.Tabelas2{
+  background-color: darkslategrey;
+  background-size: cover;
+  cursor: Pointer ;
+  text-shadow: none; 
+  color: white;
+  font-weight: bold;
+  font-size: 15px;}
+button.Tabelas2.hover{color: darkslategrey;}
+
+
+button.btn_consulta_div{
+  background-color: darkslategrey;
+  height:  45px;
+  width: 150px;
+  cursor: Pointer ;
+  text-shadow: none;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
+button.btn_consulta_div:hover{color: blue; background-color: cadetblue;}
+
+body{
+  /*position: relative;*/
+ /* margin: 5mm 5mm;*/
+
+}
+
+div.col{margin: 0mm 0mm}
+
+div.row{ margin: 0 0 ;
+         
+         /*border: 2px solid white;*/
+         width: auto;
+        } ;
+
+red{ background-color: red;}
+yellow{ background-color: yellow;}
+
+
+select{ 
+  background-color: Gainsboro;
+}
+
+  
+
+h1 {
+   margin: -5mm -15mm;
+   padding: 0 0;
+   font-size: 25px;
+   border: none;
+   color: white;
+   font-weight: bold;
+   background-color: darkslategrey;
+}
+.buttomlogout{
+   margin: -5mm -5mm;
+   padding: 0 0;
+   height:  80px;
+}
+.buttomTabela{
+   margin: 0mm 0mm;
+   padding: 0 0;
+   height:  80px;
+   background-color: darkslategrey;
+}
+.logo{ margin: -25px 350px;background-color: none}
+
+.ambiente{ font-size: 15px; text-align: center;}
+
+.btnFatura{
+  margin: 0mm 0mm;
+  padding: 0mm 0mm;
+  background-image:url("../../imagens/BtnFatura.jpg");
+  width: 20px;
+  height: 18px;
+  background-size: contain;
+  cursor: Pointer ;
+  font-size: 18px;
+}
+
+
+h2 {
+  width: auto, auto;
+  margin: -5mm 5mm 5mm 5mm;
+  padding: 0 0;
+  font-size: 14px;
+  border: none;
+}
+h2.vdata{ margin: -5mm 8mm -20mm -5mm;
+          background-color:darkslategrey ;  
+          color: white; }
+
+
+h3 {
+  margin: 5mm 5mm ;
+  padding: 0px 0px;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  transition: all .5s;
+}
+.placa{
+  background: orange;
+  color: white;}
+.fatura{
+  background-image: "../../imagens/BtnFatura.png";
+  background-size: cover;
+  size: 40mm 40mm;}
+h3.fontred{ color: red;font-size: 20px;font-weight: bold;}
+h3.fontgreen{color: green;font-size: 20px;font-weight: bold;}  
+
+
+h5{
+  margin: 0mm 0mm ;
+  padding: 0px 0px;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  background-color: darkgrey;
+  margin: -5mm 0mm;
+  padding: -20 -20;
+  top: -10;
+  width: 110%;
+  height: 20px;
+}
+.menu{background-color: darkslategrey ;  color: white; margin: 0mm -5mm -5mm;font-size: 20px; font-weight: bold; height: 30px; }  
+.laraja{ background:orange; color: white;text-align: center}
+.verde{ background:green; color: white;text-align: center}
+.roxo{ background:blueviolet; color: white;text-align: center}
+.azul{ background:blue; color: white;text-align: center}
+.marom{ background:brown; color: white;text-align: center}
+.chocolate{ background:Chocolate ; color: white;text-align: center}
+.vermelho{ background: brown ;
+           font-size: 35px; 
+           color: white;
+           text-align: center;
+           height: 60px; 
+           padding: 3mm 0mm;
+           font-weight: bold;
+           margin: -8mm -10mm ;}
+
+h6{ margin: 0mm 0mm;
+    padding: 0 0;
+    background-color: darkslategrey;
+    height: 20px;
+    color: white;
+    text-shadow: none;
+}
+.hover{
+  color:blue;
+}
+
+h4{ background-color:orangered;
+    font-size: 14px;
+  }
+
+  td{
+    margin: 2mm 2mm;
+    
+  }
+td.tb2{
+   font-size: 12px;
+}  
+
+th{ margin: 2mm 2mm;
+    padding: 1mm 1mm;
+    background-color: darkcyan;
+    color: white;
+    
+   }
+   
+
+tr{ 
+    height: 8mm;
+    width: 25mm;
+  }
+tr.total{
+  margin: 5mm 5mm;
+  padding: 10mm 10mm;
+
+}  
+
+th.divergencias{
+    font-size: 20px; 
+    color:black; 
+    background-color: white
+}
+
+
+td{ margin: 2mm 2mm ;
+    
+    border: none;
+    text-align: center;
+
+  }
+  
+
+table{ margin: 5mm 0mm;
+ 
+       border: none;
+       width: 95%;
+       height:  200px;
+}
+thead { 
+  padding: 0 0 0 0;
+  width: 100%;
+  height: 30px;
+  
+}
+tbody {
+  padding: 0 0 0 0;
+    border: none;
+    height: 500px;
+  }
+.divergencias{
+  text-align: center;
+  color: black;
+  background-color: white;
+}
+
+
+label{
+  margin: -15mm 8mm;
+  padding: 0 0;
+  font-size: 20px;
+ 
+  z-index: 1;
+  font-size: 20px;
+  font: large;
+  color: black;
+  text-shadow: none;
+}
+label:hover{
+   color:blue;
+/*   background-color: rgba(176,224,230);*/
+}
+
+label.placa{
+  /*position: absolute; */
+  text-align: center;
+  margin: -6mm 0;
+  background: orange;
+  color: white;
+}
+
+label.active{  margin: 0mm 0mm;
+
+}
+
+
+
+button{
+ 
+  size: 0mm;
+   
+  text-align: left;
+  margin-inline-start: 3mm;
+  font-size: 20px;
+  background-color: slategrey;
+  border: none;
+  color: black;
+  text-shadow: 3px 3px 1px gainsboro;
+
+}
+
+
+.btn_primare {
+  
+  color: black;
+  background: #E0F8F7; /* this is a light blue */
+    }
+
+
+*{padding: 0px;
+  margin: 0px;
+}
+
+
+img { width: 40px; }
+
+input[type="checkbox"] { display: none;}
+
+input[type="checkbox"]:checked ~ nav { 
+    
+  transform: translateX(240px);
+  
+}
+
+input.active{ color: white;}
+
+ul{ background-color: darkslategrey;
+    margin: 5mm -5mm ;
+    text-align: left;
+    font-size: 25px;
+    width: 95%;
+    list-style: none;
+
+}
+
+li{
+  margin-left: 1px;
+  margin-right: 1px;
+  
+}
+
+
+
+
+
+a{
+   
+  display: block;
+  padding: 3px 20px;
+  color: white;
+  font-size: 15px;
+  background-repeat: no-repeat;
+  font-weight: 400;
+
+  }
+  
+
+a:hover {
+
+  background-color: rgba(176,224,230);
+  color: black;
+
+}
+
+
+
+
+
+
+
+
+
+html { 
+  font-size: 10px; /* px significa "pixels": o tamanho da fonte base é agora de 10 pixels */ 
+  font-family: "Open Sans", sans-serif; /* este deve ser o nome da fonte que você obteve no Google Fonts */ 
+}
+
+

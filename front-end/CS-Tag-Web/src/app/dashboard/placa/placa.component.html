@@ -1,0 +1,166 @@
+<body>
+ 
+	
+  <title>CSTagWeb-Veiculos</title>
+
+	<h1>
+		<div class="row">
+			<div class="col s1">
+				<button class="botaoHome"  (click) = "click_home()" title="Voltar ao DASHBOARD" > </button>
+			</div>
+			<div class="col s10">
+				<button class="Tabelas"  (click) = "visualizaImportacao()" title="importacao de cadastro de placas" >
+					<a>Importacao</a>
+				</button>
+
+				<p>PLACAS DOS VEICULOS</p> <br>
+			</div>
+		</div>	  
+	 
+	</h1>
+           <!-- Compiled and minified CSS -->
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<h2>
+		
+		<div *ngIf = "exibimportacao === false">
+			<div class="row">
+				<h2>IMPORTACAO</h2>
+				<input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+				<button type="button" class="btn btn-info" (click)="Click_ImportaVeiculos()"> Importar </button>
+			</div>
+			<br>
+		</div>
+		<div *ngIf = "exibimportacao">	 
+			<div class="row"> 
+				<div class="input-field col s1">
+					<label class="active" for="placa">Placa.:</label> 
+					<input [(ngModel)]="placa.placa"  id="placa" type="text" class="validate" >
+				</div>	
+				<div class="input-field col s4">
+					<label class="active" for="descricao">Descricao</label>
+					<input [(ngModel)]="placa.descricao" id="descricao" type="text" class="autocomplete">
+				</div>	
+				<div class="input-field col s3">
+					<label class="active" for="marca">Marca</label>
+					<input [(ngModel)]="placa.marca"  id="marca" type="text" class="autocomplete">
+				</div>
+				<div class="input-field col s3">
+					<label class="active" for="modelo">modelo</label>
+					<input [(ngModel)]="placa.modelo" id="modelo" type="text" class="autocompletelete">
+				</div>
+				<div class="input-field col s1">
+					<label class="active" for="ano">ano</label>
+					<input [(ngModel)]="placa.ano" id="ano" type="text" class="autocompletelete">
+				</div>
+			</div>
+			<div class="row"> 
+				<div class="input-field col s3">
+					<!--input [(ngModel)]="placa.eixos" id="eixos" type="text"-->
+					<input [(ngModel)]="placa.eixos" type=text list=browsers >
+					<datalist  id=browsers >
+						<div *ngFor="let op of getEixos">
+							<option> {{op.valor}}
+						</div>
+						
+					</datalist>
+					<label class="active" for="eixos">eixos carregado</label>
+				</div>
+				<div class="input-field col s3">
+					<!--input [(ngModel)]="placa.eixos2" id="eixos" type="text"-->
+					<input [(ngModel)]="placa.eixos2" type=text list=browsers >
+					<datalist  id=browsers >
+						<div *ngFor="let op2 of getEixos">
+							<option> {{op2.valor}}
+						</div>
+					</datalist>
+					<label class="active" for="eixos">eixo vazio</label>
+				</div>
+					
+				<div class="input-field col s2">
+					<label class="active" for="carreta">carreta</label>
+					<input [(ngModel)]="placa.carreta" id="carreta" type="text" class="autocompletelete">
+				</div>	
+				<div class="input-field col s2">
+					<label class="active" for="segmento">segmento</label>
+					<input [(ngModel)]="placa.segmento" id="segmento" type="text" class="autocompletelete">
+				</div>
+				<div class="input-field col s2">
+					<label class="active" for="valepedagio">vale pedagio</label>
+					<input [(ngModel)]="placa.valepedagio" id="valepedagio" type="text" class="autocompletelete">
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s4">
+					<label class="active" for="cliente">cliente</label> 
+					<input [(ngModel)]="placa.cliente" id="cliente" type="text" class="autocomplete">
+				</div>	
+				<div class="input-field col s3">
+					<label class="active" for="grupo">grupo</label> 
+					<input [(ngModel)]="placa.grupo" id="grupo" type="text" class="autocomplete">
+				</div>	
+				<div class="input-field col s3">
+					<label class="active" for="subgrupo">subgrupo</label>
+					<input [(ngModel)]="placa.subgrupo" id="subgrupo" type="text" class="autocomplete">
+				</div>
+				<div class="input-field col s2">
+					<button class= "btn btn_primare" (click) = "click_salvar()"> Salvar </button>	
+					<button class= "btn btn_excluir" (click) = "click_cancelar()"> Cancelar </button>
+				</div>
+			</div>		
+		</div> <!-- ngif -->		
+
+</h2>
+
+<h3>
+	<br>	
+		<table class="bordered striped centered">
+			<tbody>	
+				<tr>
+					<th>Placa</th>
+					<th>Descricao</th>
+					<th>Marca</th>
+					<th>Modelo</th>
+					<th>Ano</th>
+					<th>EixosCarregado</th>
+					<th>EixosVazio</th>
+					<th>Carreta</th>
+					<th>Segmento</th>
+					<th>Cliente</th>
+					<th>ValePedagio</th>
+					<th>Grupo</th>
+					<th>SubGrupo</th>
+				</tr>
+		
+				<tr *ngFor="let s of Placas | paginate: { itemsPerPage: 100, currentPage: paginaAtual }; let i = index"> 
+					<td>{{s.placa}}</td>
+					<td>{{s.descricao}}</td>
+					<td>{{s.marca}}</td>
+					<td>{{s.modelo}}</td>
+					<td>{{s.ano}}</td>
+					<td>{{s.eixos}}</td>
+					<td>{{s.eixos2}}</td>
+					<td>{{s.carreta}}</td>
+					<td>{{s.segmento}}</td>
+					<td>{{s.cliente}}</td>
+					<td>{{s.valepedagio}}</td>
+					<td>{{s.grupo}}</td>
+					<td>{{s.subgrupo}}</td>
+					<td>
+						<button class= "btn btn_primare" (click) = "click_alterar(s)"> Editar </button> 
+					</td>
+
+					<td>
+						<button class= "btn btn_excluir" (click) = "click_excluir(s.placa)"> Excluir </button> 
+					</td>
+
+					
+				</tr>
+			</tbody>		
+			<pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Proximo"></pagination-controls>
+
+		</table>
+</h3>
+ 
+ <!-- Compiled and minified JavaScript -->
+    <script src="../materialize/materialize.min.js"></script>
+</body>

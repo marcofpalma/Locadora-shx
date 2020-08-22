@@ -1,0 +1,51 @@
+margim {
+  margin: 5mm 5mm;
+
+}
+
+body {
+   width: auto, auto;
+  background-size: 1600;
+  margin: 5mm 5mm;
+  background-color: #E0F8F7;
+
+}
+
+border {
+  width: 600px, 10%;
+  margin: 0cm 0cm;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+}
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+
+h1 {
+  margin: 0;
+  padding: 20px 0;
+      
+   text-align: center;
+   background-color: #0101DF;
+   color: #F8FBEF;
+   text-shadow: 3px 3px 1px black;
+   
+
+}
+
+h2 {
+  margin: 0;
+  padding: 20px 0;    
+
+  padding: 0 20px 20px 20px;
+  border: 2px solid black;
+}
+
+html { 
+  font-size: 10px; /* px significa "pixels": o tamanho da fonte base é agora de 10 pixels */ 
+  font-family: "Open Sans", sans-serif; /* este deve ser o nome da fonte que você obteve no Google Fonts */ 
+}

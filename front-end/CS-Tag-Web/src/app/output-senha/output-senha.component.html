@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>CSTagWeb-tarifas</title>
+
+           <!-- Compiled and minified CSS -->
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+   </head>
+
+
+<body>
+   <h2>
+         <div class="row">
+         <div class="col s10"></div>
+         <div class="col s2">
+            <h4>  
+            <h6> Login em {{ambiente}}<br><br> </h6>      
+               <div class="col s12"> <br> 
+                     <div class="row">
+                        <div class="input-field col s12">
+                           <label class="active" for="documento">CNPJ/CPF</label>
+                           <input [(ngModel)]="usuario.documento" id="documento" type="text" class="validate">
+                           
+                        </div>
+                     </div>
+
+                     <div class="row">
+                        <div class="input-field col s12">
+                           <label class="active" for="senha">Senha</label>
+                           <input [(ngModel)]="usuario.senha" id="senha" type="password" class="validate">
+                           
+                        </div>   
+                     </div>
+
+                  <div class="row" >
+                     <div class="col s3"></div>             
+                     <button class= "btn btn_primare" (click) = "click_acessar()">    Acessar</button>
+                  </div> 
+               
+               </div>   
+            </h4>
+         </div>
+      </div>         
+      <br><br><br><br><br><br><br><br><br><br><br>
+   </h2>
+
+ <!-- Compiled and minified JavaScript -->
+    <script src="../materialize/materialize.min.js"></script>
+            
+</body>
+</html>

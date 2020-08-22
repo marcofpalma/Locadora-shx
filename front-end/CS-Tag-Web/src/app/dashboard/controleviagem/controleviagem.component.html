@@ -1,0 +1,178 @@
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<body>
+  
+  <title>CSTagWeb-Controle de Viagem</title>
+
+	<h1>  
+		<div class="row">
+			<div class="col s1">
+				<button class="botaoHome"  (click) = "click_home()" title="Voltar ao DASHBOARD" > </button>
+			</div>
+			<div class="col s10">
+				<br>
+				<p>CONTROLE DE VIAGEM</p> 
+			</div>
+		</div>			
+
+	</h1>
+
+	
+	<h2>
+        <div class="row m2"> 
+            <div class="input-field col s1">
+				<label class="active" for="cliente">Usuario</label> 
+				<input [(ngModel)]="idmovemais" id="idmv" type="text" class="validate" readonly=false value= "">
+			</div>
+            <div class="input-field col s2">
+				<label class="active" for="cliente">Data inicio</label>
+				<input [(ngModel)]="datai" id="dataini" type="date" class="validate">
+			</div>
+            <div class="input-field col s2">
+				<label class="active" for="cliente">Data Fim</label>
+				<input [(ngModel)]="dataf" id="datafim" type="date" class="validate">
+			</div>
+			<div class="input-field col s2">
+				<label class="active" for="boxplaca">Placa</label>
+				<select [(ngModel)]="placa" class="browser-default" id="boxplaca" value="">
+					<option value="" selected>todos</option>
+					<option *ngFor="let p of getPlacas" value = {{p.PLACA}}>{{p.PLACA}}</option>
+				</select>
+			</div>
+			<div class="input-field col s2">
+				<label class="active" for="boxViagem">Viagem</label>
+				<select [(ngModel)]="viagem" class="browser-default" id="boxViagem" value="">
+					<option value="" selected>todos</option>
+					<option *ngFor="let p of getViagens" value = {{p.VIAGEM}}>{{p.VIAGEM}}</option>
+				</select>
+			</div>
+
+			<div class="input-field col s1">
+				<label class="active" for="boxCliente">Cliente</label>
+				<select [(ngModel)]="cliente" class="browser-default" id="boxCliente" value="">
+					<option value="" selected>todos</option>
+					<option *ngFor="let p of getCliente" value = {{p.CLIENTE}}>{{p.CLIENTE}}</option>
+				</select>
+			</div>
+
+			<div class="input-field col s1">
+				<label class="active" for="boxMotorista">Motorista</label>
+				<select [(ngModel)]="motorista" class="browser-default" id="boxMotorista" value="">
+					<option value="" selected>todos</option>
+					<option *ngFor="let p of getMotorista" value = {{p.MOTORISTA}}>{{p.MOTORISTA}}</option>
+				</select>
+			</div>						
+
+			<div class="input-field col s1">
+				<button class= "btn btn_primare" (click) = "click_consultar()"> Consultar </button>
+			</div>
+
+		</div>
+	</h2>
+
+	<div *ngIf="aguard">
+		<h1>
+			Aguarde Processando...
+		</h1>
+	</div>
+<h3>
+	<div class="row">
+	    <div class="col s5">
+			<br>	
+			<table class="bordered striped centered">
+				<tbody style="height: 450px">	
+					<tr>
+						<th>Viagem</th>
+						<th>Placa</th>
+						<th>inicio</th>
+						<th>fim</th>
+						
+					</tr>
+			
+					
+					<tr *ngFor="let s of getVP">
+						<td>{{s.VIAGEM}}</td>
+						<td>{{s.PLACA}}</td>
+						<td>{{s.DATAI | date : 'dd/MM/yyyy hh:mm'}}</td>
+						<td>{{s.DATAF | date : 'dd/MM/yyyy hh:mm'}}</td>
+						<td><button class= "btn btn_primare" (click) = "click_detalhe(s.DATAI,s.DATAF,s.PLACA,s.MOTORISTA,s.CLIENTE,s.EIXOS,s.EIXOS2, s.CARRETA,s.CARRETA2, s.CARRETA3)"> Detalhes </button></td>
+						
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col s7">
+			<div class="row">
+				<div class="input-field col s4">
+					<label class="active">Motorista</label> 
+					<input [(ngModel)]="lMotorista" id="idmv" type="text" class="validate" readonly=false value= "">
+				</div>
+				<div class="input-field col s4">
+					<label class="active">Eixos Carregado</label> 
+					<input [(ngModel)]="lEixos" id="idmv" type="text" class="validate" readonly=false value= "">
+				</div>  
+				<div class="input-field col s4">
+					<label class="active">Eixos Vazio</label> 
+					<input [(ngModel)]="lEixos2" id="idmv" type="text" class="validate" readonly=false value= "">
+				</div>  
+
+
+				<div class="input-field col s4">
+					<label class="active">Cliente</label> 
+					<input [(ngModel)]="lCliente" id="idmv" type="text" class="validate" readonly=false value= "">
+				</div>
+
+				<div class="input-field col s2">
+					<label class="active">Placa carreta</label> 
+					<input [(ngModel)]="LCARRETA" id="idmv" type="text" class="validate" readonly=false value= "">
+				</div>  
+				<div class="input-field col s2">
+					<label class="active">Placa carreta 2</label> 
+					<input [(ngModel)]="LCARRETA2" id="idmv" type="text" class="validate" readonly=false value= "">
+				</div>  
+				<div class="input-field col s2">
+					<label class="active">Placa carreta 3</label> 
+					<input [(ngModel)]="LCARRETA3" id="idmv" type="text" class="validate" readonly=false value= "">
+				</div>  
+
+			</div>
+
+			<table class="bordered striped centered">
+				<tbody style="height: 250px">	
+					<tr>
+					<th>Catg</th>
+					<th>Data</th>
+					<th>Descricao</th>
+					<th>Eixo Cobrado</th>
+					<th>valor Cobrado</th>
+					<th>Associacao</th>
+
+					</tr>
+			
+					
+					<tr *ngFor="let v of getdetalhes"> 
+					<td>{{v.classifiedCategory}}</td>
+					<td>{{v.occurrenceDate| date : 'dd/MM/yyyy hh:mm'}}</td>
+					<td>{{v.description}}</td>
+					<td [ngClass]="{'red':((v.classifiedNameCategory !== lEixos) 
+											&& (v.classifiedNameCategory !== lEixos2))
+										,'green':(v.classifiedNameCategory === lEixos )
+										, 'blue':(v.classifiedNameCategory === lEixos2 )
+									}" 
+						title = "eixo cobrado, verifique quando vermelho">
+						{{v.classifiedNameCategory}}</td>
+					<td>{{v.value| currency : 'R$ '}}	</td>
+					<td>{{v.associate}}</td>
+
+					</tr>
+				</tbody>		
+			</table>
+		</div>
+	</div>	
+
+</h3>
+ 
+
+</body>

@@ -1,0 +1,180 @@
+<body>
+ 
+	
+  <title>CSTagWeb-Viagens</title>
+
+	<h1>
+		<div class="row">
+			<div class="col s1">
+				<button class="botaoHome"  (click) = "click_home()" title="Voltar ao DASHBOARD" > </button>
+			</div>
+			<div class="col s10">
+				<button class="Tabelas"  (click) = "visualizaImportacao()" title="importacao de cadastro de placas" >
+					<a>Importacao</a>
+				</button>
+				<p>CONTROLE DE VIAGENS</p> <br>
+			</div>
+		</div>	  
+	 
+	</h1>
+           <!-- Compiled and minified CSS -->
+           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<h2>
+	 	<div *ngIf = "exibimportacao">
+			<div class="row">
+				<h2>IMPORTACAO</h2>
+				<input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+				<button type="button" class="btn btn-info" (click)="Click_ImportaVeiculos()"> Importar </button>
+
+			</div>
+	 	</div>
+
+		<div *ngIf = "exibimportacao === false">
+		 <div class="row"> 
+			<div class="input-field col s1">
+				<label class="active" for="cliente">Usuario</label> 
+				<input [(ngModel)]="idmovemais" id="idmv" type="text" class="validate" readonly=false value= "">
+			</div>
+			<div class="input-field col s2">
+				<label class="active" for="Data">Data inicio</label>
+				<input [(ngModel)]="DATAI" id="Data" type="date" class="validate">
+			</div>
+			<div class="input-field col s2">
+				<label class="active" for="Dataf">Data fim</label>
+				<input [(ngModel)]="DATAF" id="Dataf" type="date" class="validate">
+			</div>
+
+			<div class="input-field col s3">
+				<label class="active" for="Viagem">Viagem</label>
+				<input [(ngModel)]="VIAGEM" id="Viagem" type="text" class="autocomplete">
+			</div>	
+			<div class="input-field col s3">
+				<label class="active" for="Motorista">Motorista</label>
+				<input [(ngModel)]="MOTORISTA"  id="Motorista" type="text" class="autocomplete">
+			</div>
+		
+        </div>
+ 		<div class="row">
+			<div class="input-field col s2">
+				<label class="active" for="Cliente">Cliente</label>
+				<input [(ngModel)]="CLIENTE"  id="Cliente" type="text" class="autocomplete">
+			</div>	
+			<div class="input-field col s1">
+				<label class="active" for="placa">Placa</label>
+				<input [(ngModel)]="placa" id="placa" type="text" list=browsers>
+				<datalist  id=browsers >
+					<div *ngFor="let op of getPlacas">
+                         <option> {{op.placa}}
+					</div>
+			    </datalist>
+
+			</div>
+        	<div class="input-field col s1">
+				<input [(ngModel)]="CARRETA" type=text list=browsers1>
+				<datalist  id=browsers1 >
+					<div *ngFor="let op1 of getCarretas">
+                         <option> {{op1.placa}} 
+					</div>
+					
+			    </datalist>
+				<label class="active" for="CARRETA">Carreta 1</label>
+			</div>
+        	<div class="input-field col s1">
+				<input [(ngModel)]="CARRETA2" type=text list=browsers2>
+				<datalist  id=browsers2 >
+					<div *ngFor="let op2 of getCarretas">
+                         <option> {{op2.placa}}
+					</div>
+					
+			    </datalist>
+				<label class="active" for="CARRETA2">Carreta 2</label>
+			</div>
+			<div class="input-field col s1">
+				<input [(ngModel)]="CARRETA3" type=text list=browsers3>
+				<datalist  id=browsers3 >
+					<div *ngFor="let op3 of getCarretas">
+                         <option> {{op3.placa}}
+					</div>
+					
+			    </datalist>
+				<label class="active" for="CARRETA3">Carreta 3</label>
+			</div>			
+				<div class="input-field col s2">
+					<input [(ngModel)]="EIXOS" type=text list=browsers5 >
+					<datalist  id=browsers5 >
+						<div *ngFor="let op11 of getEixos2">
+							<option> {{op11.valor}}
+						</div>
+						
+					</datalist>
+					<label class="active" for="eixos">eixos carregado</label>
+				</div>
+				<div class="input-field col s2">
+					<input [(ngModel)]="EIXOS2" type=text list=browsers6 >
+					<datalist  id=browsers6 >
+						<div *ngFor="let op12 of getEixos2">
+							<option> {{op12.valor}}
+						</div>
+					</datalist>
+					<label class="active" for="eixos">eixo vazio</label>
+				</div>
+			
+			<div class="input-field col s2">
+			    <button class= "btn btn_primare" (click) = "click_salvar()"> Salvar </button>	
+				<button class= "btn btn_excluir" (click) = "click_cancelar()"> Cancelar </button>		
+			</div>		
+		 </div>
+	</div>				
+
+</h2>
+
+<h3>
+	<br>	
+		<table class="bordered striped centered">
+			<tbody>	
+				<tr>
+					<th>Data Inicio</th>
+					<th>Data Fim</th>
+					<th>Viagem</th>
+					<th>Placa</th>
+					<th>Carreta</th>
+					<th>Carreta 2</th>
+					<th>Carreta 3</th>
+					<th>Motorista</th>
+					<th>Cliente</th>
+					<th>Eixos Carregado</th>
+					<th>Eixos Vazio</th>
+				</tr>
+		
+				<tr *ngFor="let s of getViagens| paginate: { itemsPerPage: 100, currentPage: paginaAtual }; let i = index"> 
+					<td>{{s.DATAI| date : 'dd/MM/yyyy'}}</td>
+					<td>{{s.DATAF| date : 'dd/MM/yyyy'}}</td>
+					<td>{{s.VIAGEM}}</td>
+					<td>{{s.PLACA}}</td>
+					<td>{{s.CARRETA}}</td>
+					<td>{{s.CARRETA2}}</td>
+					<td>{{s.CARRETA3}}</td>
+					<td>{{s.MOTORISTA}}</td>
+					<td>{{s.CLIENTE}}</td>
+					<td>{{s.EIXOS}}</td>
+					<td>{{s.EIXOS2}}</td>
+					
+					<td>
+						<button class= "btn btn_primare" (click) = "click_alterar(s)"> Editar </button> 
+					</td>
+
+					<td>
+						<button class= "btn btn_excluir" (click) = "click_excluir(s.PLACA)"> Excluir </button> 
+					</td>
+
+					
+				</tr>
+			</tbody>	
+			<pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Proximo"></pagination-controls>
+	
+		</table>
+</h3>
+ 
+ <!-- Compiled and minified JavaScript -->
+    <script src="../materialize/materialize.min.js"></script>
+</body>
